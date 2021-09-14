@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
@@ -28,10 +27,10 @@ class StorageInfoCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
             width: 20,
-            child: SvgPicture.asset(svgSrc),
+            // child: SvgPicture.asset(svgSrc),
           ),
           Expanded(
             child: Padding(

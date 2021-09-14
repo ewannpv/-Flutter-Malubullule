@@ -1,6 +1,5 @@
 import 'package:malubullule/models/my_files.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
@@ -35,10 +34,10 @@ class FileInfoCard extends StatelessWidget {
                   color: info.color!.withOpacity(0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                child: SvgPicture.asset(
-                  info.svgSrc!,
-                  color: info.color,
-                ),
+                // child: SvgPicture.asset(
+                //   info.svgSrc!,
+                //   color: info.color,
+                // ),
               ),
               const Icon(Icons.more_vert, color: Colors.white54)
             ],

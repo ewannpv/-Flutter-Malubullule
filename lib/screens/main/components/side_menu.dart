@@ -12,7 +12,7 @@ class SideMenu extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-            child: Image.asset("assets/images/logo.svg"),
+            child: SvgPicture.asset("assets/images/logo.svg"),
           ),
           DrawerListTile(
             title: "Dashboard",
@@ -77,11 +77,11 @@ class DrawerListTile extends StatelessWidget {
     return ListTile(
       onTap: press,
       horizontalTitleGap: 0.0,
-      leading: SvgPicture.asset(
-        svgSrc,
-        color: Colors.white54,
-        height: 16,
-      ),
+      // leading: SvgPicture.asset(
+      //   svgSrc,
+      //   color: Colors.white54,
+      //   height: 16,
+      // ),
       title: Text(
         title,
         style: const TextStyle(color: Colors.white54),

@@ -1,11 +1,11 @@
 import 'package:malubullule/responsive.dart';
-import 'package:malubullule/screens/dashboard/components/my_fields.dart';
+import 'package:malubullule/screens/dashboard/components/sub_header.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
+import 'components/drinks_list.dart';
 import 'components/header.dart';
 
-import 'components/recent_files.dart';
 import 'components/storage_details.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -27,9 +27,9 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      const MyFiles(),
+                      const SubHeader(),
+                      const DrinksList(),
                       const SizedBox(height: defaultPadding),
-                      const RecentFiles(),
                       if (Responsive.isMobile(context))
                         const SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) const StarageDetails(),

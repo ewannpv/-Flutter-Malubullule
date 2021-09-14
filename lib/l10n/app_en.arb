@@ -1,6 +1,10 @@
 {
   "maLubullule": "MaLubullule",
   "@maLubullule": {
-    "description": "Title of the app"
+    "description": "Title of the app."
+  },
+  "headerSubtitle": "Start you beer is good, finish your lubullule is better",
+  "@headerSubtitle": {
+    "description": "Title of the app."
   }
 }

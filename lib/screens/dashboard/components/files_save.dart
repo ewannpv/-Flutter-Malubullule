@@ -1,6 +1,7 @@
 import 'package:malubullule/models/my_files.dart';
 import 'package:malubullule/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../constants.dart';
 import 'file_info_card.dart';
@@ -18,9 +19,12 @@ class MyFiles extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "My Files",
-              style: Theme.of(context).textTheme.subtitle1,
+            Expanded(
+              child: Text(
+                AppLocalizations.of(context)!.headerSubtitle,
+                style: Theme.of(context).textTheme.subtitle1,
+                maxLines: 2,
+              ),
             ),
             ElevatedButton.icon(
               style: TextButton.styleFrom(
