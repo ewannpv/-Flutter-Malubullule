@@ -1,4 +1,4 @@
-import 'package:malubullule/models/recent_file.dart';
+import 'package:malubullule/models/drink.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
@@ -46,12 +46,12 @@ class DrinksList extends StatelessWidget {
                 label: Text("Volume"),
               ),
               DataColumn(
-                label: Text("Hour"),
+                label: Text("Date"),
               ),
             ],
             rows: List.generate(
-              demoRecentFiles.length,
-              (index) => recentFileDataRow(demoRecentFiles[index]),
+              demoDrinks.length,
+              (index) => drinksDataRow(demoDrinks[index]),
             ),
           ),
         ],
@@ -60,19 +60,19 @@ class DrinksList extends StatelessWidget {
   }
 }
 
-DataRow recentFileDataRow(RecentFile fileInfo) {
+DataRow drinksDataRow(Drink drinkInfo) {
   return DataRow(
     cells: [
       DataCell(AutoSizeText(
-        fileInfo.title!,
+        drinkInfo.name!,
         maxLines: 2,
       )),
       DataCell(AutoSizeText(
-        fileInfo.date!,
+        drinkInfo.abv!,
         maxLines: 2,
       )),
       DataCell(AutoSizeText(
-        fileInfo.size!,
+        drinkInfo.date!,
         maxLines: 2,
       )),
     ],
