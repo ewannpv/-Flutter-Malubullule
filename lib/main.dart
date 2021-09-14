@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       home: MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => MenuController(),
+            create: (context) => MenuProvider(),
           ),
           ChangeNotifierProvider(
             create: (context) => DrinksProvider(),
