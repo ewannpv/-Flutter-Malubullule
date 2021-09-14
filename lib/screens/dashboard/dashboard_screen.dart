@@ -2,6 +2,7 @@ import 'package:malubullule/responsive.dart';
 import 'package:malubullule/screens/dashboard/components/sub_header.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
+import 'components/cards_list.dart';
 import 'components/drinks_list.dart';
 import 'components/header.dart';
 import 'components/storage_details.dart';
@@ -26,6 +27,8 @@ class DashboardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       const SubHeader(),
+                      const CardsList(),
+                      const SizedBox(height: defaultPadding),
                       const DrinksList(),
                       const SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context))

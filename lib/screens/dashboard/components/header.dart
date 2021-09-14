@@ -1,4 +1,4 @@
-import 'package:malubullule/controllers/menu_controller.dart';
+import 'package:malubullule/providers/menu_provider.dart';
 import 'package:malubullule/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,7 @@ class Header extends StatelessWidget {
         if (!Responsive.isDesktop(context))
           IconButton(
             icon: const Icon(Icons.menu),
-            onPressed: context.read<MenuController>().controlMenu,
+            onPressed: context.read<MenuProvider>().controlMenu,
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),

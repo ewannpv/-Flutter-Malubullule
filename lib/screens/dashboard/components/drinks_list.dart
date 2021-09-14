@@ -37,15 +37,7 @@ class DrinksList extends StatelessWidget {
                   final drinksProvider =
                       Provider.of<DrinksProvider>(context, listen: false);
 
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return ListenableProvider.value(
-                        value: drinksProvider,
-                        child: const AddDrink(),
-                      );
-                    },
-                  );
+                  presentAddDrinkSheet(context, drinksProvider);
                 },
                 child: const Icon(Icons.add),
               ),
@@ -73,6 +65,22 @@ class DrinksList extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> presentAddDrinkSheet(
+      BuildContext context, DrinksProvider drinksProvider) {
+    return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(defaultPadding),
+      ),
+      context: context,
+      builder: (BuildContext context) {
+        return ListenableProvider.value(
+          value: drinksProvider,
+          child: const AddDrink(),
+        );
+      },
     );
   }
 }

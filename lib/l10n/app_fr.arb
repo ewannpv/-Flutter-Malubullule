@@ -1,5 +1,9 @@
 {
   "maLubullule": "MaLubullule",
   "headerSubtitle": "Peter sa biere c'est bien, finir sa lubullule c'est mieux.",
-  "drinkListTitle": "Liste des boissons"
+  "drinkListTitle": "Liste des boissons",
+  "weightCardLabelText": "Poids (Kg)",
+  "weightCardHelperText": "Ton poids en Kg.",
+  "genderCardLabelText": "Genre",
+  "genderCardHelperText": "Ton genre."
 }

@@ -10,5 +10,21 @@
   "drinkListTitle": "Drinks List",
   "@drinkListTitle": {
     "description": "Title for the drinks likst section."
+  },
+  "weightCardLabelText": "Weight (Kg)",
+  "@weightCardLabelText": {
+    "description": "Label Text of the weight text form field."
+  },
+  "weightCardHelperText": "Your weight in Kg.",
+  "@weightCardHelperText": {
+    "description": "Helper Text of the weight text form field."
+  },
+  "genderCardLabelText": "Gender",
+  "@genderCardLabelText": {
+    "description": "Label Text of the gender text form field."
+  },
+  "genderCardHelperText": "Your genre.",
+  "@genderCardHelperText": {
+    "description": "Helper Text of the gender text form field."
   }
 }

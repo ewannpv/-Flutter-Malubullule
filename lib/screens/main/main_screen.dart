@@ -1,4 +1,4 @@
-import 'package:malubullule/controllers/menu_controller.dart';
+import 'package:malubullule/providers/menu_provider.dart';
 import 'package:malubullule/responsive.dart';
 import 'package:malubullule/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
+      key: context.read<MenuProvider>().scaffoldKey,
       drawer: const SideMenu(),
       body: SafeArea(
         child: Row(
