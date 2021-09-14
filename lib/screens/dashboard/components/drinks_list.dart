@@ -1,9 +1,12 @@
 import 'package:malubullule/models/drink.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-
+import 'package:malubullule/providers/drinks_provider.dart';
+import 'package:malubullule/screens/dashboard/components/add_drink.dart';
 import '../../../constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class DrinksList extends StatelessWidget {
   const DrinksList({
@@ -25,12 +28,25 @@ class DrinksList extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  "drinks list",
+                  AppLocalizations.of(context)!.drinkListTitle,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  final drinksProvider =
+                      Provider.of<DrinksProvider>(context, listen: false);
+
+                  showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ListenableProvider.value(
+                        value: drinksProvider,
+                        child: const AddDrink(),
+                      );
+                    },
+                  );
+                },
                 child: const Icon(Icons.add),
               ),
             ],
@@ -50,8 +66,9 @@ class DrinksList extends StatelessWidget {
               ),
             ],
             rows: List.generate(
-              demoDrinks.length,
-              (index) => drinksDataRow(demoDrinks[index]),
+              context.watch<DrinksProvider>().getDrinks().length,
+              (index) => drinksDataRow(
+                  context.watch<DrinksProvider>().getDrinks()[index]),
             ),
           ),
         ],
@@ -68,11 +85,11 @@ DataRow drinksDataRow(Drink drinkInfo) {
         maxLines: 2,
       )),
       DataCell(AutoSizeText(
-        drinkInfo.abv!,
+        drinkInfo.abv.toString(),
         maxLines: 2,
       )),
       DataCell(AutoSizeText(
-        drinkInfo.date!,
+        drinkInfo.date.toString(),
         maxLines: 2,
       )),
     ],

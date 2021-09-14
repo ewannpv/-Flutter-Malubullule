@@ -6,5 +6,9 @@
   "headerSubtitle": "Start you beer is good, finish your lubullule is better",
   "@headerSubtitle": {
     "description": "Title of the app."
+  },
+  "drinkListTitle": "Drinks List",
+  "@drinkListTitle": {
+    "description": "Title for the drinks likst section."
   }
 }

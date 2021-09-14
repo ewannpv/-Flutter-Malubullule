@@ -1,7 +1,9 @@
 import 'package:uuid/uuid.dart';
 
 class Drink {
-  final String? name, abv, volume, date;
+  final String? name;
+  final int? volume, date;
+  final double? abv;
   final List<String>? categories;
   final String id = getRandomId();
   Drink({this.name, this.abv, this.volume, this.date, this.categories});
@@ -16,44 +18,44 @@ String getRandomId() {
 List demoDrinks = [
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
   Drink(
       name: "86 Original",
-      abv: "8.6",
-      volume: "50",
-      date: "15h",
+      abv: 8.6,
+      volume: 50,
+      date: 15,
       categories: ["beer", "classic"]),
 ];
