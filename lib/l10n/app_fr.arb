@@ -1,7 +1,7 @@
 {
   "maLubullule": "MaLubullule",
   "headerSubtitle": "Peter sa biere c'est bien, finir sa lubullule c'est mieux.",
-  "drinkListTitle": "Liste des boissons",
+  "drinkListTitle": "Liste des brevages",
   "weightCardLabelText": "Poids (Kg)",
   "weightCardHelperText": "Ton poids en Kg.",
   "genderCardLabelText": "Genre",
@@ -9,5 +9,6 @@
   "drinkListNameText": "Nom",
   "drinkListVolumeText": "Volume",
   "drinkListDateText": "Date",
-  "addDrinkDrinkText": "Boisson"
+  "addDrinkDrinkText": "Brevage",
+  "addDrinkCategoryText": "Catégorie du brevage"
 }

@@ -33,7 +33,7 @@ class AddDrinksProvider extends ChangeNotifier {
     return displayedDrinks;
   }
 
-  Future<void> updateSelectedCategory(String category) async {
+  void updateSelectedCategory(String category) {
     selectedCategory =
         _categories.firstWhere((element) => element.displayedName == category);
 
@@ -55,7 +55,7 @@ class AddDrinksProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateSelectedDrink(String drink) async {
+  void updateSelectedDrink(String drink) {
     selectedDrink = _drinks.firstWhere((element) => element.name == drink);
     notifyListeners();
   }

@@ -7,7 +7,7 @@
   "@headerSubtitle": {
     "description": "Title of the app."
   },
-  "drinkListTitle": "Drinks List",
+  "drinkListTitle": "Beverage List",
   "@drinkListTitle": {
     "description": "Title for the drinks likst section."
   },
@@ -39,8 +39,12 @@
   "@drinkListDateText": {
     "description": "Text from the the drink list sheet."
   },
-  "addDrinkDrinkText": "Drink",
+  "addDrinkDrinkText": "Beverage",
   "@addDrinkDrinkText": {
     "description": "Text above the drink field."
+  },
+  "addDrinkCategoryText": "Beverage category",
+  "@addDrinkCategoryText": {
+    "description": "Text above the category field."
   }
 }

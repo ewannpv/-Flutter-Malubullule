@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:malubullule/models/drink.dart';
-import 'package:malubullule/models/drink_category.dart';
 import 'package:malubullule/providers/add_drinks_provider.dart';
 import 'package:malubullule/providers/drinks_provider.dart';
 import 'package:provider/provider.dart';
@@ -52,8 +51,9 @@ class _AddDrink extends StatelessWidget {
                           .watch<AddDrinksProvider>()
                           .displayedCategories,
                       decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context)!.addDrinkDrinkText),
+                        labelText:
+                            AppLocalizations.of(context)!.addDrinkCategoryText,
+                      ),
                       onChanged: (value) {
                         context
                             .read<AddDrinksProvider>()
@@ -66,12 +66,13 @@ class _AddDrink extends StatelessWidget {
                           .name,
                       items: context.watch<AddDrinksProvider>().displayedDrinks,
                       decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)!.addDrinkDrinkText,
-                      ),
+                          labelText:
+                              AppLocalizations.of(context)!.addDrinkDrinkText,
+                          helperText:
+                              '${context.watch<AddDrinksProvider>().selectedDrink!.name}, ${context.watch<AddDrinksProvider>().selectedDrink!.abv}%'),
                       onChanged: (value) {
                         context
-                            .watch<AddDrinksProvider>()
+                            .read<AddDrinksProvider>()
                             .updateSelectedDrink(value!);
                       }),
                 ]);
