@@ -36,10 +36,15 @@ class AddDrinksProvider extends ChangeNotifier {
   Future<void> updateSelectedCategory(String category) async {
     selectedCategory =
         _categories.firstWhere((element) => element.displayedName == category);
-    _displayedDrinks = _drinks
-        .where(
-            (element) => element.categories!.contains(selectedCategory!.name))
-        .toList();
+
+    if (selectedCategory!.name == 'custom') {
+      _displayedDrinks = Drink.getCustomDrinks();
+    } else {
+      _displayedDrinks = _drinks
+          .where(
+              (element) => element.categories!.contains(selectedCategory!.name))
+          .toList();
+    }
     selectedDrink = _displayedDrinks[0];
     displayedDrinks = _displayedDrinks
         .map<DropdownMenuItem<String>>((e) => DropdownMenuItem<String>(

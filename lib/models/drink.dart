@@ -44,6 +44,20 @@ class Drink {
       (json.decode(drinks) as List<dynamic>)
           .map<Drink>((item) => Drink.fromJson(item))
           .toList();
+
+  static List<Drink> getCustomDrinks() {
+    List<Drink> drinks = [];
+    for (int index = 1; index <= 100; index += 1) {
+      String name = 'Brevage à ${index.toString()}°';
+      drinks.add(Drink(
+          name: name,
+          abv: index.toDouble(),
+          volume: 5,
+          date: 0,
+          categories: ['custom']));
+    }
+    return drinks;
+  }
 }
 
 List demoDrinks = [
