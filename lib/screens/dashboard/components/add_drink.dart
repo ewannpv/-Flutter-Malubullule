@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:malubullule/models/drink.dart';
+import 'package:malubullule/models/drink_category.dart';
 import 'package:malubullule/providers/add_drinks_provider.dart';
 import 'package:malubullule/providers/drinks_provider.dart';
 import 'package:provider/provider.dart';
@@ -33,33 +34,50 @@ class _AddDrink extends StatelessWidget {
       height: 400,
       child: Column(
         children: [
-          FutureBuilder<List<Drink>>(
-              future: context.watch<AddDrinksProvider>().getDrinks(),
-              builder: (context, projectSnap) {
-                if (projectSnap.connectionState == ConnectionState.none ||
-                    !projectSnap.hasData) {
-                  //print('project snapshot data is: ${projectSnap.data}');
-                  return Container();
-                } else {
-                  List<DropdownMenuItem<String>> items = projectSnap.data!
-                      .map<DropdownMenuItem<String>>(
-                          (e) => DropdownMenuItem<String>(
-                                value: e.name,
-                                child: Text(e.name!),
-                              ))
-                      .toList();
-                  return DropdownButtonFormField<String>(
-                      value: items[0].value,
-                      items: items,
+          FutureBuilder(
+            future: context.watch<AddDrinksProvider>().updateCatalog(),
+            builder: (context, projectSnap) {
+              if (projectSnap.connectionState == ConnectionState.none ||
+                  !projectSnap.hasData) {
+                //print('project snapshot data is: ${projectSnap.data}');
+                return Container();
+              } else {
+                return Column(children: [
+                  DropdownButtonFormField<String>(
+                      value: context
+                          .watch<AddDrinksProvider>()
+                          .selectedCategory!
+                          .displayedName,
+                      items: context
+                          .watch<AddDrinksProvider>()
+                          .displayedCategories,
+                      decoration: InputDecoration(
+                          labelText:
+                              AppLocalizations.of(context)!.addDrinkDrinkText),
+                      onChanged: (value) {
+                        context
+                            .read<AddDrinksProvider>()
+                            .updateSelectedCategory(value!);
+                      }),
+                  DropdownButtonFormField<String>(
+                      value: context
+                          .watch<AddDrinksProvider>()
+                          .selectedDrink!
+                          .name,
+                      items: context.watch<AddDrinksProvider>().displayedDrinks,
                       decoration: InputDecoration(
                         labelText:
-                            AppLocalizations.of(context)!.genderCardLabelText,
-                        helperText:
-                            AppLocalizations.of(context)!.genderCardHelperText,
+                            AppLocalizations.of(context)!.addDrinkDrinkText,
                       ),
-                      onChanged: (value) {});
-                }
-              }),
+                      onChanged: (value) {
+                        context
+                            .watch<AddDrinksProvider>()
+                            .updateSelectedDrink(value!);
+                      }),
+                ]);
+              }
+            },
+          ),
           Row(
             children: [
               TextButton(

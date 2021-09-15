@@ -35,19 +35,20 @@ class GenderCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DropdownButtonFormField<String>(
-                    value: _items[index].value,
-                    items: _items,
-                    decoration: InputDecoration(
-                      labelText:
-                          AppLocalizations.of(context)!.genderCardLabelText,
-                      helperText:
-                          AppLocalizations.of(context)!.genderCardHelperText,
-                    ),
-                    onChanged: (value) {
-                      int gender = _items
-                          .indexWhere((element) => element.value == value);
-                      context.read<OptionsProvider>().updateGender(gender);
-                    }),
+                  value: _items[index].value,
+                  items: _items,
+                  decoration: InputDecoration(
+                    labelText:
+                        AppLocalizations.of(context)!.genderCardLabelText,
+                    helperText:
+                        AppLocalizations.of(context)!.genderCardHelperText,
+                  ),
+                  onChanged: (value) {
+                    int gender =
+                        _items.indexWhere((element) => element.value == value);
+                    context.read<OptionsProvider>().updateGender(gender);
+                  },
+                ),
               ],
             ),
           );

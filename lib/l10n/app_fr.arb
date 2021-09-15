@@ -8,5 +8,6 @@
   "genderCardHelperText": "Ton genre.",
   "drinkListNameText": "Nom",
   "drinkListVolumeText": "Volume",
-  "drinkListDateText": "Date"
+  "drinkListDateText": "Date",
+  "addDrinkDrinkText": "Boisson"
 }

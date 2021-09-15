@@ -29,14 +29,18 @@
   },
   "drinkListNameText": "Name",
   "@drinkListNameText": {
-    "description": "Text from the the drink list sheet"
+    "description": "Text from the the drink list sheet."
   },
   "drinkListVolumeText": "Volume",
   "@drinkListVolumeText": {
-    "description": "Text from the the drink list sheet"
+    "description": "Text from the the drink list sheet."
   },
   "drinkListDateText": "Date",
   "@drinkListDateText": {
-    "description": "Text from the the drink list sheet"
+    "description": "Text from the the drink list sheet."
+  },
+  "addDrinkDrinkText": "Drink",
+  "@addDrinkDrinkText": {
+    "description": "Text above the drink field."
   }
 }
