@@ -5,63 +5,56 @@ import 'package:malubullule/models/list_item.dart';
 import 'package:malubullule/providers/options_provider.dart';
 import 'package:provider/provider.dart';
 
-class GenderCard extends StatefulWidget {
-  const GenderCard({Key? key}) : super(key: key);
-
-  @override
-  _GenderCardState createState() => _GenderCardState();
-}
-
-class _GenderCardState extends State<GenderCard> {
+class GenderCard extends StatelessWidget {
   final List<ListItem> _dropdownItems = [
     ListItem(1, "Male"),
     ListItem(2, "Female"),
   ];
-  late List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
-  late ListItem _selectedItem;
 
-  @override
-  initState() {
-    super.initState();
-    _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
-    _selectedItem = _dropdownMenuItems[0].value!;
-    getPrefs().then((result) {
-      setState(() {});
-    });
-  }
-
-  getPrefs() async {
-    int index = await context.read<OptionsProvider>().getGender();
-    setState(() {
-      _selectedItem = _dropdownMenuItems[index].value!;
-    });
-  }
+  GenderCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
-        color: secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          DropdownButtonFormField<ListItem>(
-              value: _selectedItem,
-              items: _dropdownMenuItems,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.genderCardLabelText,
-                helperText: AppLocalizations.of(context)!.genderCardHelperText,
-              ),
-              onChanged: (value) {
-                int gender = _dropdownItems.indexOf(value!);
-                context.read<OptionsProvider>().updateGender(gender);
-              }),
-        ],
-      ),
+    List<DropdownMenuItem<ListItem>> _dropdownMenuItems =
+        buildDropDownMenuItems(_dropdownItems);
+
+    return FutureBuilder<int>(
+      future: context.watch<OptionsProvider>().getGender(),
+      builder: (context, projectSnap) {
+        if (projectSnap.connectionState == ConnectionState.none ||
+            !projectSnap.hasData) {
+          //print('project snapshot data is: ${projectSnap.data}');
+          return Container();
+        } else {
+          int index = projectSnap.data!;
+          return Container(
+            padding: const EdgeInsets.all(defaultPadding),
+            decoration: const BoxDecoration(
+              color: secondaryColor,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                DropdownButtonFormField<ListItem>(
+                    value: _dropdownMenuItems[index].value,
+                    items: _dropdownMenuItems,
+                    decoration: InputDecoration(
+                      labelText:
+                          AppLocalizations.of(context)!.genderCardLabelText,
+                      helperText:
+                          AppLocalizations.of(context)!.genderCardHelperText,
+                    ),
+                    onChanged: (value) {
+                      int gender = _dropdownItems.indexOf(value!);
+                      context.read<OptionsProvider>().updateGender(gender);
+                    }),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

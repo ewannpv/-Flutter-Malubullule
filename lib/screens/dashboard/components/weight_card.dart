@@ -5,56 +5,52 @@ import 'package:malubullule/providers/options_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../constants.dart';
 
-class WeightCard extends StatefulWidget {
+class WeightCard extends StatelessWidget {
   const WeightCard({Key? key}) : super(key: key);
 
   @override
-  _WeightCardState createState() => _WeightCardState();
-}
-
-class _WeightCardState extends State<WeightCard> {
-  final _controller = TextEditingController();
-
-  @override
-  initState() {
-    super.initState();
-    _controller.text = '30';
-    getPrefs();
-  }
-
-  getPrefs() async {
-    int weight = await context.read<OptionsProvider>().getGWeight();
-    _controller.text = weight.toString();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
-        color: secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextFormField(
-            controller: _controller,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.weightCardLabelText,
-              helperText: AppLocalizations.of(context)!.weightCardHelperText,
+    return FutureBuilder<int>(
+      future: context.watch<OptionsProvider>().getGWeight(),
+      builder: (context, projectSnap) {
+        if (projectSnap.connectionState == ConnectionState.none ||
+            !projectSnap.hasData) {
+          //print('project snapshot data is: ${projectSnap.data}');
+          return Container();
+        } else {
+          return Container(
+            padding: const EdgeInsets.all(defaultPadding),
+            decoration: const BoxDecoration(
+              color: secondaryColor,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (value) {
-              if (value != "") {
-                context.read<OptionsProvider>().updateWeight(int.parse(value));
-              }
-            },
-          ),
-        ],
-      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextFormField(
+                  initialValue: projectSnap.data.toString(),
+                  decoration: InputDecoration(
+                    labelText:
+                        AppLocalizations.of(context)!.weightCardLabelText,
+                    helperText:
+                        AppLocalizations.of(context)!.weightCardHelperText,
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  onChanged: (value) {
+                    if (value != "") {
+                      context
+                          .read<OptionsProvider>()
+                          .updateWeight(int.parse(value));
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

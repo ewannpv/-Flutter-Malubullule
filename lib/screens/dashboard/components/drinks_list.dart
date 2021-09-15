@@ -18,7 +18,7 @@ class DrinksList extends StatelessWidget {
     return FutureBuilder<List<Drink>>(
       future: context.watch<DrinksProvider>().getDrinks(),
       builder: (context, projectSnap) {
-        if (projectSnap.connectionState == ConnectionState.none &&
+        if (projectSnap.connectionState == ConnectionState.none ||
             !projectSnap.hasData) {
           //print('project snapshot data is: ${projectSnap.data}');
           return Container();

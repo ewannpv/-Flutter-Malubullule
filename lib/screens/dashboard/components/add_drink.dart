@@ -11,18 +11,10 @@ class AddDrink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(defaultPadding),
+      padding: const EdgeInsets.only(top: defaultPadding),
       height: 400,
       child: Column(
         children: [
-          TextFormField(
-            initialValue: '70',
-            decoration: const InputDecoration(
-              labelText: 'Weight (Kg)',
-              helperText: 'Your weight in Kg.',
-            ),
-            keyboardType: TextInputType.number,
-          ),
           Row(
             children: [
               TextButton(

@@ -42,7 +42,7 @@ class CardsListGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List cards = [const WeightCard(), const GenderCard()];
+    List cards = [const WeightCard(), GenderCard()];
 
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
