@@ -1,27 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:malubullule/models/drink.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrinksProvider extends ChangeNotifier {
-  List drinks = List.empty();
+  List<Drink> drinks = [];
 
-  List getDrinks() {
-    if (drinks.isEmpty) drinks = demoDrinks;
+  Future<List<Drink>> getDrinks() async {
+    if (drinks.isEmpty) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (prefs.containsKey('drinks_list')) {
+        String? drinksData = prefs.getString('drinks_list');
+        drinks = Drink.decode(drinksData!)!;
+      }
+    }
     return drinks;
   }
 
-  void updateDrinkList(List newList) {
+  void updateDrinkList(List<Drink> newList) {
     drinks = newList;
     notifyListeners();
   }
 
-  void addDrink(Drink newDrink) {
+  Future<void> addDrink(Drink newDrink) async {
     drinks.add(newDrink);
+    String drinksData = Drink.encode(drinks);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('drinks_list', drinksData);
     notifyListeners();
   }
 
-  void removeDrinkWithId(String id) {
+  Future<void> removeDrinkWithId(String id) async {
     int index = drinks.indexWhere((element) => element.id == id);
     drinks.removeAt(index);
+    String drinksData = Drink.encode(drinks);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('drinks_list', drinksData);
     notifyListeners();
   }
 }

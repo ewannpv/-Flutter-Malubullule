@@ -14,60 +14,74 @@ class DrinksList extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
-        color: secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  AppLocalizations.of(context)!.drinkListTitle,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final drinksProvider =
-                      Provider.of<DrinksProvider>(context, listen: false);
-
-                  presentAddDrinkSheet(context, drinksProvider);
-                },
-                child: const Icon(Icons.add),
-              ),
-            ],
-          ),
-          DataTable2(
-            columnSpacing: defaultPadding,
-            horizontalMargin: defaultPadding,
-            columns: [
-              DataColumn(
-                label: Text(
-                  AppLocalizations.of(context)!.drinkListNameText,
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  AppLocalizations.of(context)!.drinkListVolumeText,
-                ),
-              ),
-              DataColumn(
-                  label: Text(AppLocalizations.of(context)!.drinkListDateText)),
-            ],
-            rows: List.generate(
-              context.watch<DrinksProvider>().getDrinks().length,
-              (index) => drinksDataRow(
-                  context.watch<DrinksProvider>().getDrinks()[index]),
+  build(BuildContext context) {
+    return FutureBuilder<List<Drink>>(
+      future: context.watch<DrinksProvider>().getDrinks(),
+      builder: (context, projectSnap) {
+        if (projectSnap.connectionState == ConnectionState.none &&
+            !projectSnap.hasData) {
+          //print('project snapshot data is: ${projectSnap.data}');
+          return Container();
+        } else {
+          return Container(
+            padding: const EdgeInsets.all(defaultPadding),
+            decoration: const BoxDecoration(
+              color: secondaryColor,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-          ),
-        ],
-      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context)!.drinkListTitle,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: bgColor),
+                      onPressed: () {
+                        final drinksProvider =
+                            Provider.of<DrinksProvider>(context, listen: false);
+
+                        presentAddDrinkSheet(context, drinksProvider);
+                      },
+                      child: const Icon(Icons.add),
+                    ),
+                  ],
+                ),
+                DataTable2(
+                  columnSpacing: defaultPadding,
+                  horizontalMargin: defaultPadding,
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        AppLocalizations.of(context)!.drinkListNameText,
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        AppLocalizations.of(context)!.drinkListVolumeText,
+                      ),
+                    ),
+                    DataColumn(
+                        label: Text(
+                            AppLocalizations.of(context)!.drinkListDateText)),
+                  ],
+                  rows: projectSnap.data != null
+                      ? List.generate(
+                          projectSnap.data!.length,
+                          (index) => drinksDataRow(projectSnap.data![index]),
+                        )
+                      : List.empty(),
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 
