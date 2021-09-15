@@ -14,15 +14,6 @@ class CardsList extends StatelessWidget {
     final Size _size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Infos",
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-          ],
-        ),
         const SizedBox(height: defaultPadding),
         Responsive(
           mobile: CardsListGridView(

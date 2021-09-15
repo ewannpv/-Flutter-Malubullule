@@ -1,10 +1,8 @@
 import 'package:malubullule/responsive.dart';
-import 'package:malubullule/screens/dashboard/components/sub_header.dart';
 import 'package:flutter/material.dart';
-import '../../constants.dart';
+import 'package:malubullule/constants.dart';
 import 'components/cards_list.dart';
 import 'components/drinks_list.dart';
-import 'components/header.dart';
 import 'components/storage_details.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -17,8 +15,6 @@ class DashboardScreen extends StatelessWidget {
         padding: const EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
-            const Header(),
-            const SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -26,7 +22,6 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      const SubHeader(),
                       const CardsList(),
                       const SizedBox(height: defaultPadding),
                       const DrinksList(),

@@ -5,5 +5,8 @@
   "weightCardLabelText": "Poids (Kg)",
   "weightCardHelperText": "Ton poids en Kg.",
   "genderCardLabelText": "Genre",
-  "genderCardHelperText": "Ton genre."
+  "genderCardHelperText": "Ton genre.",
+  "drinkListNameText": "Nom",
+  "drinkListVolumeText": "Volume",
+  "drinkListDateText": "Date"
 }

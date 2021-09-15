@@ -26,5 +26,17 @@
   "genderCardHelperText": "Your genre.",
   "@genderCardHelperText": {
     "description": "Helper Text of the gender text form field."
+  },
+  "drinkListNameText": "Name",
+  "@drinkListNameText": {
+    "description": "Text from the the drink list sheet"
+  },
+  "drinkListVolumeText": "Volume",
+  "@drinkListVolumeText": {
+    "description": "Text from the the drink list sheet"
+  },
+  "drinkListDateText": "Date",
+  "@drinkListDateText": {
+    "description": "Text from the the drink list sheet"
   }
 }

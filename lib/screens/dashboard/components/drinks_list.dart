@@ -7,6 +7,7 @@ import '../../../constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrinksList extends StatelessWidget {
   const DrinksList({
@@ -46,16 +47,19 @@ class DrinksList extends StatelessWidget {
           DataTable2(
             columnSpacing: defaultPadding,
             horizontalMargin: defaultPadding,
-            columns: const [
+            columns: [
               DataColumn(
-                label: Text("Name"),
+                label: Text(
+                  AppLocalizations.of(context)!.drinkListNameText,
+                ),
               ),
               DataColumn(
-                label: Text("Volume"),
+                label: Text(
+                  AppLocalizations.of(context)!.drinkListVolumeText,
+                ),
               ),
               DataColumn(
-                label: Text("Date"),
-              ),
+                  label: Text(AppLocalizations.of(context)!.drinkListDateText)),
             ],
             rows: List.generate(
               context.watch<DrinksProvider>().getDrinks().length,
