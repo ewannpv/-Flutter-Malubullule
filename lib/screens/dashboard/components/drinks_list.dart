@@ -88,8 +88,9 @@ class DrinksList extends StatelessWidget {
   Future<void> presentAddDrinkSheet(
       BuildContext context, DrinksProvider drinksProvider) {
     return showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(defaultPadding),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
       ),
       context: context,
       builder: (BuildContext context) {
