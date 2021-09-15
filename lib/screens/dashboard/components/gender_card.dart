@@ -1,9 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:malubullule/constants.dart';
 import 'package:malubullule/models/list_item.dart';
-import '../../../constants.dart';
+import 'package:malubullule/providers/options_provider.dart';
+import 'package:provider/provider.dart';
 
 class GenderCard extends StatefulWidget {
   const GenderCard({Key? key}) : super(key: key);
@@ -21,11 +21,20 @@ class _GenderCardState extends State<GenderCard> {
   late ListItem _selectedItem;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
     _selectedItem = _dropdownMenuItems[0].value!;
-    log("done");
+    getPrefs().then((result) {
+      setState(() {});
+    });
+  }
+
+  getPrefs() async {
+    int index = await context.read<OptionsProvider>().getGender();
+    setState(() {
+      _selectedItem = _dropdownMenuItems[index].value!;
+    });
   }
 
   @override
@@ -48,9 +57,8 @@ class _GenderCardState extends State<GenderCard> {
                 helperText: AppLocalizations.of(context)!.genderCardHelperText,
               ),
               onChanged: (value) {
-                setState(() {
-                  _selectedItem = value!;
-                });
+                int gender = _dropdownItems.indexOf(value!);
+                context.read<OptionsProvider>().updateGender(gender);
               }),
         ],
       ),
