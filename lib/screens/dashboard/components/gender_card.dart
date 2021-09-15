@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:malubullule/constants.dart';
-import 'package:malubullule/models/list_item.dart';
 import 'package:malubullule/providers/options_provider.dart';
 import 'package:provider/provider.dart';
 
 class GenderCard extends StatelessWidget {
-  final List<ListItem> _dropdownItems = [
-    ListItem(1, "Male"),
-    ListItem(2, "Female"),
-  ];
-
+  final List<DropdownMenuItem<String>> _items = ["Male", "Female"]
+      .map<DropdownMenuItem<String>>((e) => DropdownMenuItem<String>(
+            value: e,
+            child: Text(e),
+          ))
+      .toList();
   GenderCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<ListItem>> _dropdownMenuItems =
-        buildDropDownMenuItems(_dropdownItems);
-
     return FutureBuilder<int>(
       future: context.watch<OptionsProvider>().getGender(),
       builder: (context, projectSnap) {
@@ -37,9 +34,9 @@ class GenderCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                DropdownButtonFormField<ListItem>(
-                    value: _dropdownMenuItems[index].value,
-                    items: _dropdownMenuItems,
+                DropdownButtonFormField<String>(
+                    value: _items[index].value,
+                    items: _items,
                     decoration: InputDecoration(
                       labelText:
                           AppLocalizations.of(context)!.genderCardLabelText,
@@ -47,7 +44,8 @@ class GenderCard extends StatelessWidget {
                           AppLocalizations.of(context)!.genderCardHelperText,
                     ),
                     onChanged: (value) {
-                      int gender = _dropdownItems.indexOf(value!);
+                      int gender = _items
+                          .indexWhere((element) => element.value == value);
                       context.read<OptionsProvider>().updateGender(gender);
                     }),
               ],

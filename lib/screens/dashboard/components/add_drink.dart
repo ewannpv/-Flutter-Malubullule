@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:malubullule/models/drink.dart';
 import 'package:malubullule/providers/add_drinks_provider.dart';

@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:malubullule/models/drink_category.dart';
 import 'package:malubullule/models/drink.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 import 'package:csv/csv.dart';
 
 class AddDrinksProvider extends ChangeNotifier {
