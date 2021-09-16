@@ -28,27 +28,28 @@ class WeightCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextFormField(
-                  initialValue: projectSnap.data.toString(),
-                  decoration: InputDecoration(
-                    labelText:
-                        AppLocalizations.of(context)!.weightCardLabelText,
-                    helperText:
-                        AppLocalizations.of(context)!.weightCardHelperText,
-                  ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) {
-                    if (value != "") {
-                      context
-                          .read<OptionsProvider>()
-                          .updateWeight(int.parse(value));
-                    }
-                  },
-                ),
+                weightField(projectSnap, context),
               ],
             ),
           );
+        }
+      },
+    );
+  }
+
+  TextFormField weightField(
+      AsyncSnapshot<int> projectSnap, BuildContext context) {
+    return TextFormField(
+      initialValue: projectSnap.data.toString(),
+      decoration: InputDecoration(
+        labelText: AppLocalizations.of(context)!.weightCardLabelText,
+        helperText: AppLocalizations.of(context)!.weightCardHelperText,
+      ),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      onChanged: (value) {
+        if (value != "") {
+          context.read<OptionsProvider>().updateWeight(int.parse(value));
         }
       },
     );

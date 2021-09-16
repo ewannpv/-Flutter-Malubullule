@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,6 +30,10 @@ class MyApp extends StatelessWidget {
         canvasColor: secondaryColor,
         brightness: Brightness.dark,
         primaryColor: primaryColor,
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(fontSize: 22),
+          helperStyle: TextStyle(fontSize: 14),
+        ),
       ),
       localizationsDelegates: const [
         AppLocalizations.delegate,

@@ -10,5 +10,8 @@
   "drinkListVolumeText": "Volume",
   "drinkListDateText": "Date",
   "addDrinkDrinkText": "Brevage",
-  "addDrinkCategoryText": "Catégorie du brevage"
+  "addDrinkCategoryText": "Catégorie du brevage",
+  "addDrinkVolumeText": "Volume",
+  "addDrinkVolumeTextHelper": "Volume d'une dose (cL)",
+  "addDrinkConfirmationButton": "Ajouter à la liste"
 }

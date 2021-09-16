@@ -15,6 +15,13 @@ class AddDrinksProvider extends ChangeNotifier {
 
   Drink? selectedDrink;
   DrinkCategory? selectedCategory;
+  int selectedVolume = 0;
+
+  Drink generateDrink() {
+    Drink generartedDrink = selectedDrink!;
+    generartedDrink.date = 99;
+    return generartedDrink;
+  }
 
   Future<List<DropdownMenuItem<String>>> updateCatalog() async {
     await _getCategories();
@@ -46,6 +53,7 @@ class AddDrinksProvider extends ChangeNotifier {
           .toList();
     }
     selectedDrink = _displayedDrinks[0];
+    selectedVolume = selectedDrink!.volume!;
     displayedDrinks = _displayedDrinks
         .map<DropdownMenuItem<String>>((e) => DropdownMenuItem<String>(
               value: e.name,
@@ -57,7 +65,17 @@ class AddDrinksProvider extends ChangeNotifier {
 
   void updateSelectedDrink(String drink) {
     selectedDrink = _drinks.firstWhere((element) => element.name == drink);
+    selectedVolume = selectedDrink!.volume!;
     notifyListeners();
+  }
+
+  void updateSelectedVolume(int volume) {
+    selectedVolume = volume;
+    notifyListeners();
+  }
+
+  String getSelectedVolume() {
+    return selectedVolume.toString();
   }
 
   Future<List<Drink>> _getDrinks() async {

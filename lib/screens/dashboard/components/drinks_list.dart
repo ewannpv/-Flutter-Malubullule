@@ -88,6 +88,7 @@ class DrinksList extends StatelessWidget {
   Future<void> presentAddDrinkSheet(
       BuildContext context, DrinksProvider drinksProvider) {
     return showModalBottomSheet(
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
@@ -96,7 +97,7 @@ class DrinksList extends StatelessWidget {
       builder: (BuildContext context) {
         return ListenableProvider.value(
           value: drinksProvider,
-          child: const AddDrink(),
+          child: Wrap(children: const [AddDrink()]),
         );
       },
     );

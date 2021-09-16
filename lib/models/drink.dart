@@ -4,7 +4,8 @@ import 'package:uuid/uuid.dart';
 
 class Drink {
   final String? name;
-  final int? volume, date;
+  final int? volume;
+  int? date;
   final double? abv;
   final List? categories;
   final String id = Drink._getRandomId();

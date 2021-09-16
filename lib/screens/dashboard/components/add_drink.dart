@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:malubullule/models/drink.dart';
 import 'package:malubullule/providers/add_drinks_provider.dart';
 import 'package:malubullule/providers/drinks_provider.dart';
@@ -23,14 +24,33 @@ class AddDrink extends StatelessWidget {
   }
 }
 
-class _AddDrink extends StatelessWidget {
+class _AddDrink extends StatefulWidget {
   const _AddDrink({Key? key}) : super(key: key);
+
+  @override
+  _AddDrinkState createState() => _AddDrinkState();
+}
+
+class _AddDrinkState extends State<_AddDrink> {
+  late TextEditingController _volumeTextController;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _volumeTextController = TextEditingController(
+        text: context.watch<AddDrinksProvider>().getSelectedVolume());
+  }
+
+  @override
+  void dispose() {
+    _volumeTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
-      height: 400,
       child: Column(
         children: [
           FutureBuilder(
@@ -42,60 +62,87 @@ class _AddDrink extends StatelessWidget {
                 return Container();
               } else {
                 return Column(children: [
-                  DropdownButtonFormField<String>(
-                      value: context
-                          .watch<AddDrinksProvider>()
-                          .selectedCategory!
-                          .displayedName,
-                      items: context
-                          .watch<AddDrinksProvider>()
-                          .displayedCategories,
-                      decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)!.addDrinkCategoryText,
-                      ),
-                      onChanged: (value) {
-                        context
-                            .read<AddDrinksProvider>()
-                            .updateSelectedCategory(value!);
-                      }),
-                  DropdownButtonFormField<String>(
-                      value: context
-                          .watch<AddDrinksProvider>()
-                          .selectedDrink!
-                          .name,
-                      items: context.watch<AddDrinksProvider>().displayedDrinks,
-                      decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context)!.addDrinkDrinkText,
-                          helperText:
-                              '${context.watch<AddDrinksProvider>().selectedDrink!.name}, ${context.watch<AddDrinksProvider>().selectedDrink!.abv}%'),
-                      onChanged: (value) {
-                        context
-                            .read<AddDrinksProvider>()
-                            .updateSelectedDrink(value!);
-                      }),
+                  categoryField(context),
+                  const SizedBox(height: defaultPadding),
+                  drinkField(context),
+                  const SizedBox(height: defaultPadding),
+                  volumetField(context),
+                  const SizedBox(height: defaultPadding * 2),
+                  addButton(context),
                 ]);
               }
             },
           ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {
-                  context.read<DrinksProvider>().addDrink(Drink(
-                      name: 'test',
-                      abv: 5.5,
-                      volume: 50,
-                      date: 45,
-                      categories: []));
-                },
-                child: const Text("test"),
-              )
-            ],
-          )
         ],
       ),
+    );
+  }
+
+  Row addButton(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: ElevatedButton(
+            onPressed: () {
+              Drink newDrink =
+                  context.read<AddDrinksProvider>().generateDrink();
+              context.read<DrinksProvider>().addDrink(newDrink);
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 22),
+                minimumSize: const Size(0, 50)),
+            child:
+                Text(AppLocalizations.of(context)!.addDrinkConfirmationButton),
+          ),
+        ),
+      ],
+    );
+  }
+
+  DropdownButtonFormField<String> drinkField(BuildContext context) {
+    return DropdownButtonFormField<String>(
+        value: context.watch<AddDrinksProvider>().selectedDrink!.name,
+        items: context.watch<AddDrinksProvider>().displayedDrinks,
+        decoration: InputDecoration(
+            labelText: AppLocalizations.of(context)!.addDrinkDrinkText,
+            helperText:
+                '${context.watch<AddDrinksProvider>().selectedDrink!.name}, ${context.watch<AddDrinksProvider>().selectedDrink!.abv}%'),
+        onChanged: (value) {
+          context.read<AddDrinksProvider>().updateSelectedDrink(value!);
+        });
+  }
+
+  DropdownButtonFormField<String> categoryField(BuildContext context) {
+    return DropdownButtonFormField<String>(
+        value:
+            context.watch<AddDrinksProvider>().selectedCategory!.displayedName,
+        items: context.watch<AddDrinksProvider>().displayedCategories,
+        decoration: InputDecoration(
+          labelText: AppLocalizations.of(context)!.addDrinkCategoryText,
+        ),
+        onChanged: (value) {
+          context.read<AddDrinksProvider>().updateSelectedCategory(value!);
+        });
+  }
+
+  TextFormField volumetField(BuildContext context) {
+    return TextFormField(
+      controller: _volumeTextController,
+      decoration: InputDecoration(
+        labelText: AppLocalizations.of(context)!.addDrinkVolumeText,
+        helperText: AppLocalizations.of(context)!.addDrinkVolumeTextHelper,
+      ),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      onChanged: (value) {
+        if (value != "") {
+          context
+              .read<AddDrinksProvider>()
+              .updateSelectedVolume(int.parse(value));
+        }
+      },
     );
   }
 }

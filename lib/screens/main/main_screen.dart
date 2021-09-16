@@ -24,9 +24,9 @@ class MainScreen extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
         leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: context.read<MenuProvider>().controlMenu,
-        ),
+            icon: const Icon(Icons.sports_bar_outlined),
+            onPressed: () {} // context.read<MenuProvider>().controlMenu,
+            ),
       ),
       body: SafeArea(
         child: Row(

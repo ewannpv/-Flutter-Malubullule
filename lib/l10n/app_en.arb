@@ -46,5 +46,17 @@
   "addDrinkCategoryText": "Beverage category",
   "@addDrinkCategoryText": {
     "description": "Text above the category field."
+  },
+  "addDrinkVolumeText": "Volume",
+  "@addDrinkVolumeText": {
+    "description": "Text above the volume field."
+  },
+  "addDrinkVolumeTextHelper": "Volume of a dose (cL)",
+  "@addDrinkVolumeTextHelper": {
+    "description": "Text below the volume field."
+  },
+  "addDrinkConfirmationButton": "Add to the list",
+  "@addDrinkConfirmationButton": {
+    "description": "Confirmation button text."
   }
 }
