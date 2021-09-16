@@ -33,18 +33,31 @@ class _AddDrink extends StatefulWidget {
 
 class _AddDrinkState extends State<_AddDrink> {
   late TextEditingController _volumeTextController;
+  late TextEditingController _timeTextController;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _volumeTextController = TextEditingController(
         text: context.watch<AddDrinksProvider>().getSelectedVolume());
+    _timeTextController = TextEditingController(
+        text: context.watch<AddDrinksProvider>().getSelectedTimeToString());
   }
 
   @override
   void dispose() {
     _volumeTextController.dispose();
     super.dispose();
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: context.read<AddDrinksProvider>().getSelectedTime(),
+    );
+    if (picked != null) {
+      context.read<AddDrinksProvider>().updateSelectedTime(picked);
+    }
   }
 
   @override
@@ -67,6 +80,8 @@ class _AddDrinkState extends State<_AddDrink> {
                   drinkField(context),
                   const SizedBox(height: defaultPadding),
                   volumetField(context),
+                  const SizedBox(height: defaultPadding),
+                  timeField(context),
                   const SizedBox(height: defaultPadding * 2),
                   addButton(context),
                 ]);
@@ -74,6 +89,25 @@ class _AddDrinkState extends State<_AddDrink> {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  InkWell timeField(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        _selectTime(context);
+      },
+      child: TextFormField(
+        onSaved: (val) {},
+        enabled: false,
+        controller: _timeTextController,
+        decoration: const InputDecoration(
+          labelText: 'Time',
+          helperText: 'Time when started',
+        ),
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       ),
     );
   }

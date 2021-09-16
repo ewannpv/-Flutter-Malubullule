@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:malubullule/fetchers/fetch_categories.dart';
 import 'package:malubullule/fetchers/fetch_drinks.dart';
 import 'package:malubullule/models/drink_category.dart';
@@ -16,10 +17,11 @@ class AddDrinksProvider extends ChangeNotifier {
   Drink? selectedDrink;
   DrinkCategory? selectedCategory;
   int selectedVolume = 0;
+  int selectedTime = DateTime.now().millisecondsSinceEpoch;
 
   Drink generateDrink() {
     Drink generartedDrink = selectedDrink!;
-    generartedDrink.date = 99;
+    generartedDrink.date = selectedTime;
     return generartedDrink;
   }
 
@@ -66,6 +68,24 @@ class AddDrinksProvider extends ChangeNotifier {
   void updateSelectedDrink(String drink) {
     selectedDrink = _drinks.firstWhere((element) => element.name == drink);
     selectedVolume = selectedDrink!.volume!;
+    notifyListeners();
+  }
+
+  TimeOfDay getSelectedTime() {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(selectedTime);
+    return TimeOfDay.fromDateTime(dateTime);
+  }
+
+  String getSelectedTimeToString() {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(selectedTime);
+    return DateFormat.Hm().format(dateTime);
+  }
+
+  void updateSelectedTime(TimeOfDay timeOfDay) {
+    DateTime dateTime = DateTime.now();
+    dateTime = DateTime(dateTime.year, dateTime.month, dateTime.day,
+        timeOfDay.hour, timeOfDay.minute);
+    selectedTime = dateTime.millisecondsSinceEpoch;
     notifyListeners();
   }
 
