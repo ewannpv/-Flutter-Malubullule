@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:malubullule/models/drink.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,6 @@ class DrinksList extends StatelessWidget {
                       onPressed: () {
                         final drinksProvider =
                             Provider.of<DrinksProvider>(context, listen: false);
-
                         presentAddDrinkSheet(context, drinksProvider);
                       },
                       child: const Icon(Icons.add),
@@ -56,9 +56,15 @@ class DrinksList extends StatelessWidget {
                   columnSpacing: defaultPadding,
                   horizontalMargin: defaultPadding,
                   columns: [
-                    DataColumn(
+                    DataColumn2(
+                      size: ColumnSize.L,
                       label: Text(
                         AppLocalizations.of(context)!.drinkListNameText,
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        AppLocalizations.of(context)!.drinkListAbvText,
                       ),
                     ),
                     DataColumn(
@@ -105,6 +111,8 @@ class DrinksList extends StatelessWidget {
 }
 
 DataRow drinksDataRow(Drink drinkInfo) {
+  String date = DateFormat.Hm()
+      .format(DateTime.fromMillisecondsSinceEpoch(drinkInfo.date!));
   return DataRow(
     cells: [
       DataCell(AutoSizeText(
@@ -116,7 +124,11 @@ DataRow drinksDataRow(Drink drinkInfo) {
         maxLines: 2,
       )),
       DataCell(AutoSizeText(
-        drinkInfo.date.toString(),
+        drinkInfo.volume.toString(),
+        maxLines: 2,
+      )),
+      DataCell(AutoSizeText(
+        date,
         maxLines: 2,
       )),
     ],

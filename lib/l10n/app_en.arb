@@ -58,5 +58,9 @@
   "addDrinkConfirmationButton": "Add to the list",
   "@addDrinkConfirmationButton": {
     "description": "Confirmation button text."
+  },
+  "drinkListAbvText": "Abv",
+  "@drinkListAbvText": {
+    "description": "Text from the the abv list sheet."
   }
 }

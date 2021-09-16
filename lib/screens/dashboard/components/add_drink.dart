@@ -82,7 +82,7 @@ class _AddDrinkState extends State<_AddDrink> {
                   volumetField(context),
                   const SizedBox(height: defaultPadding),
                   timeField(context),
-                  const SizedBox(height: defaultPadding * 2),
+                  const SizedBox(height: defaultPadding),
                   addButton(context),
                 ]);
               }

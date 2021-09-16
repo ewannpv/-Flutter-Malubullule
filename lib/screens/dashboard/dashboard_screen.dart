@@ -1,6 +1,8 @@
+import 'package:malubullule/providers/drinks_provider.dart';
 import 'package:malubullule/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:malubullule/constants.dart';
+import 'package:provider/provider.dart';
 import 'components/cards_list.dart';
 import 'components/drinks_list.dart';
 import 'components/storage_details.dart';
@@ -10,6 +12,9 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Fetch datas.
+    context.read<DrinksProvider>().updateCatalog();
+
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(defaultPadding),
@@ -25,7 +30,6 @@ class DashboardScreen extends StatelessWidget {
                       const CardsList(),
                       const SizedBox(height: defaultPadding),
                       const DrinksList(),
-                      const SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context))
                         const SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) const StarageDetails(),
