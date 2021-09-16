@@ -5,8 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:malubullule/constants.dart';
 import 'package:malubullule/providers/menu_provider.dart';
-import 'package:malubullule/providers/drinks_provider.dart';
-import 'package:malubullule/providers/options_provider.dart';
+import 'package:malubullule/providers/drink_stats_provider.dart';
 import 'package:malubullule/screens/main/main_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -51,10 +50,10 @@ class MyApp extends StatelessWidget {
             create: (context) => MenuProvider(),
           ),
           ChangeNotifierProvider(
-            create: (context) => DrinksProvider(),
+            create: (context) => DrinkStatsProvider(),
           ),
           ChangeNotifierProvider(
-            create: (context) => OptionsProvider(),
+            create: (context) => DrinkStatsProvider(),
           ),
         ],
         child: const MainScreen(),

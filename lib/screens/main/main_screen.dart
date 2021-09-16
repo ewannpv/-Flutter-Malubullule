@@ -1,7 +1,7 @@
 import 'package:malubullule/constants.dart';
 import 'package:malubullule/providers/menu_provider.dart';
 import 'package:malubullule/responsive.dart';
-import 'package:malubullule/screens/dashboard/dashboard_screen.dart';
+import 'package:malubullule/screens/dashboard/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,7 +42,7 @@ class MainScreen extends StatelessWidget {
             const Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: DashboardScreen(),
+              child: HomeScreen(),
             ),
           ],
         ),

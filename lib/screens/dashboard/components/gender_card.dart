@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:malubullule/constants.dart';
-import 'package:malubullule/providers/options_provider.dart';
+import 'package:malubullule/providers/drink_stats_provider.dart';
 import 'package:provider/provider.dart';
 
 class GenderCard extends StatelessWidget {
@@ -16,7 +16,7 @@ class GenderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<int>(
-      future: context.watch<OptionsProvider>().getGender(),
+      future: context.watch<DrinkStatsProvider>().getGender(),
       builder: (context, projectSnap) {
         if (projectSnap.connectionState == ConnectionState.none ||
             !projectSnap.hasData) {
@@ -53,7 +53,7 @@ class GenderCard extends StatelessWidget {
       ),
       onChanged: (value) {
         int gender = _items.indexWhere((element) => element.value == value);
-        context.read<OptionsProvider>().updateGender(gender);
+        context.read<DrinkStatsProvider>().updateGender(gender);
       },
     );
   }

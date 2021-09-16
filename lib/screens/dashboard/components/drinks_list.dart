@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:malubullule/models/drink.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:malubullule/providers/drinks_provider.dart';
+import 'package:malubullule/providers/drink_stats_provider.dart';
 import 'package:malubullule/screens/dashboard/components/add_drink.dart';
 import '../../../constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -17,7 +17,7 @@ class DrinksList extends StatelessWidget {
   @override
   build(BuildContext context) {
     return FutureBuilder<List<Drink>>(
-      future: context.watch<DrinksProvider>().getDrinks(),
+      future: context.watch<DrinkStatsProvider>().getDrinks(),
       builder: (context, projectSnap) {
         if (projectSnap.connectionState == ConnectionState.none ||
             !projectSnap.hasData) {
@@ -44,8 +44,9 @@ class DrinksList extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: bgColor),
                       onPressed: () {
-                        final drinksProvider =
-                            Provider.of<DrinksProvider>(context, listen: false);
+                        final drinksProvider = Provider.of<DrinkStatsProvider>(
+                            context,
+                            listen: false);
                         presentAddDrinkSheet(context, drinksProvider);
                       },
                       child: const Icon(Icons.add),
@@ -96,7 +97,7 @@ class DrinksList extends StatelessWidget {
   }
 
   Future<void> presentAddDrinkSheet(
-      BuildContext context, DrinksProvider drinksProvider) {
+      BuildContext context, DrinkStatsProvider drinksProvider) {
     return showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(

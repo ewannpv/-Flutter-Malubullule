@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:malubullule/models/drink.dart';
 import 'package:malubullule/providers/add_drinks_provider.dart';
-import 'package:malubullule/providers/drinks_provider.dart';
+import 'package:malubullule/providers/drink_stats_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -121,7 +121,7 @@ class _AddDrinkState extends State<_AddDrink> {
             onPressed: () {
               Drink newDrink =
                   context.read<AddDrinksProvider>().generateDrink();
-              context.read<DrinksProvider>().addDrink(newDrink);
+              context.read<DrinkStatsProvider>().addDrink(newDrink);
               Navigator.pop(context);
             },
             style: ElevatedButton.styleFrom(

@@ -11,6 +11,12 @@ class Drink {
   final String id = Drink._getRandomId();
   Drink({this.name, this.abv, this.volume, this.date, this.categories});
 
+  double alcoholAbsorbed() {
+    if (abv == 0 || volume == 0) return 0;
+    // 1L of alcohol = 800g.
+    return abv! * (volume! / 100) * 8;
+  }
+
 // Returns a random id.
   static String _getRandomId() {
     Uuid uuid = const Uuid();
@@ -60,48 +66,3 @@ class Drink {
     return drinks;
   }
 }
-
-List demoDrinks = [
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-  Drink(
-      name: "86 Original",
-      abv: 8.6,
-      volume: 50,
-      date: 15,
-      categories: ["beer", "classic"]),
-];

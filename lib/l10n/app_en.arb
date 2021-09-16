@@ -62,5 +62,17 @@
   "drinkListAbvText": "Abv",
   "@drinkListAbvText": {
     "description": "Text from the the abv list sheet."
+  },
+  "alcoholLevelText": "Alcohol use level :",
+  "@alcoholLevelText": {
+    "description": "Text from the card stats."
+  },
+  "alcoholAbsorbedText": "Gram of alcohol absorbed:",
+  "@alcoholAbsorbedText": {
+    "description": "Text from the card stats."
+  },
+  "estimatedTimeText": "Estimated time to reach the legal threshold:",
+  "@estimatedTimeText": {
+    "description": "Text from the card stats."
   }
 }

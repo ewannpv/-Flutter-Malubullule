@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:malubullule/constants.dart';
 import 'package:malubullule/providers/drink_stats_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class WeightCard extends StatelessWidget {
-  const WeightCard({Key? key}) : super(key: key);
+class StatsCard extends StatelessWidget {
+  const StatsCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<int>(
-      future: context.watch<DrinkStatsProvider>().getGWeight(),
+    return FutureBuilder(
+      future: context.watch<DrinkStatsProvider>().getDrinks(),
       builder: (context, projectSnap) {
         if (projectSnap.connectionState == ConnectionState.none ||
             !projectSnap.hasData) {
@@ -28,7 +29,31 @@ class WeightCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                weightField(projectSnap, context),
+                Text(
+                  AppLocalizations.of(context)!.alcoholLevelText,
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                Text(
+                  context.watch<DrinkStatsProvider>().getAlcoholLevel() + 'g/L',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                Text(
+                  AppLocalizations.of(context)!.alcoholAbsorbedText,
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                Text(
+                  context.watch<DrinkStatsProvider>().getAlcoholAbsorbed() +
+                      'g',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                Text(
+                  AppLocalizations.of(context)!.estimatedTimeText,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  context.watch<DrinkStatsProvider>().getEstimatedTime(),
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ],
             ),
           );

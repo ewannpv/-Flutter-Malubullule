@@ -14,5 +14,8 @@
   "addDrinkCategoryText": "Catégorie du brevage",
   "addDrinkVolumeText": "Volume",
   "addDrinkVolumeTextHelper": "Volume d'une dose (cL)",
-  "addDrinkConfirmationButton": "Ajouter à la liste"
+  "addDrinkConfirmationButton": "Ajouter à la liste",
+  "alcoholLevelText": "Taux d’alcoolémie:",
+  "alcoholAbsorbedText": "Gramme d’alcools ingérés:",
+  "estimatedTimeText": "Temps estimé pour atteindre le seuil légal :"
 }
