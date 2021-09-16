@@ -52,42 +52,46 @@ class DrinksList extends StatelessWidget {
                     ),
                   ],
                 ),
-                DataTable2(
-                  columnSpacing: defaultPadding,
-                  horizontalMargin: defaultPadding,
-                  columns: [
-                    DataColumn2(
-                      size: ColumnSize.L,
-                      label: Text(
-                        AppLocalizations.of(context)!.drinkListNameText,
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        AppLocalizations.of(context)!.drinkListAbvText,
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        AppLocalizations.of(context)!.drinkListVolumeText,
-                      ),
-                    ),
-                    DataColumn(
-                        label: Text(
-                            AppLocalizations.of(context)!.drinkListDateText)),
-                  ],
-                  rows: projectSnap.data != null
-                      ? List.generate(
-                          projectSnap.data!.length,
-                          (index) => drinksDataRow(projectSnap.data![index]),
-                        )
-                      : List.empty(),
-                ),
+                drinkDataTable(context, projectSnap),
               ],
             ),
           );
         }
       },
+    );
+  }
+
+  DataTable2 drinkDataTable(
+      BuildContext context, AsyncSnapshot<List<Drink>> projectSnap) {
+    return DataTable2(
+      columnSpacing: defaultPadding,
+      horizontalMargin: defaultPadding,
+      columns: [
+        DataColumn2(
+          size: ColumnSize.L,
+          label: Text(
+            AppLocalizations.of(context)!.drinkListNameText,
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            AppLocalizations.of(context)!.drinkListAbvText,
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            AppLocalizations.of(context)!.drinkListVolumeText,
+          ),
+        ),
+        DataColumn(
+            label: Text(AppLocalizations.of(context)!.drinkListDateText)),
+      ],
+      rows: projectSnap.data != null
+          ? List.generate(
+              projectSnap.data!.length,
+              (index) => drinksDataRow(projectSnap.data![index]),
+            )
+          : List.empty(),
     );
   }
 
