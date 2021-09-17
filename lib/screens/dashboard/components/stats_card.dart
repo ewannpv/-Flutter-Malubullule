@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:malubullule/constants.dart';
 import 'package:malubullule/providers/drink_stats_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatsCard extends StatelessWidget {
   const StatsCard({Key? key}) : super(key: key);
